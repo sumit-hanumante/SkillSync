@@ -1,13 +1,15 @@
 spring:
-  application:
-    name: api-gateway
   cloud:
     gateway:
       routes:
         - id: user-service
-          uri: lb://user-service
+          uri: lb://USER-SERVICE  # Match Eureka's uppercase service name
           predicates:
             - Path=/api/users/**
+      loadbalancer:
+        health-check:
+          interval: 5s  # Speed up health checks
+
 server:
   port: 8080
 
