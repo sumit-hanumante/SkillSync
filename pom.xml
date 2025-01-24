@@ -1,0 +1,13 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.skillsync</groupId>
+    <artifactId>skillsync</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>user-service</module>
+        <module>resume-analyzer</module>
+        <module>job-matching-service</module>
+        <module>api-gateway</module>
+    </modules>
+</project>
