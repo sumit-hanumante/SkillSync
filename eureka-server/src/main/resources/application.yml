@@ -1,7 +1,18 @@
 server:
-  port: 8761  # Default Eureka port
+  port: 8761
+
+spring:
+  application:
+    name: eureka-server # Uppercase not required, but clients should use the exact name
 
 eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
   client:
-    register-with-eureka: false  # Eureka server doesn't register itself
+    register-with-eureka: false
     fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  server:
+    enable-self-preservation: false # Keep disabled for development
+    eviction-interval-timer-in-ms: 5000

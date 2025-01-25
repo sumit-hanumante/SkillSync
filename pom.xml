@@ -5,6 +5,7 @@
     <artifactId>skillsync</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
+
     <modules>
         <module>eureka-server</module>
         <module>user-service</module>
@@ -12,17 +13,32 @@
         <module>job-matching-service</module>
         <module>api-gateway</module>
     </modules>
+
+    <!-- Parent (Spring Boot) -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.0</version>
+        <version>3.2.2</version>
     </parent>
+
     <properties>
-        <spring-cloud.version>2023.0.0</spring-cloud.version> <!-- Update Spring Cloud -->
+        <!-- Explicitly enforce Spring Boot and Spring Cloud versions -->
+        <spring-boot.version>3.2.2</spring-boot.version>
+        <spring-cloud.version>2023.0.1</spring-cloud.version>
     </properties>
+
     <dependencyManagement>
         <dependencies>
-            <!-- Spring Cloud BOM (Bill of Materials) for version management -->
+            <!-- Import Spring Boot BOM to enforce versions -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Import Spring Cloud BOM -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>

@@ -1,10 +1,25 @@
 spring:
   application:
-    name: user-service  # Service name for Eureka registration
+    name: user-service  # Unique service name for Eureka
+
 server:
-  port: 8081           # Unique port for user-service
+  port: 8081  #%20Explicitly%20define%20the%20port
 
 eureka:
   client:
+    register-with-eureka: true  # Enable registration
+    fetch-registry: true        # Fetch registry from Eureka
     service-url:
-      defaultZone: http://localhost:8761/eureka/  # Eureka Server URL
+      defaultZone: http://localhost:8761/eureka/  # Eureka server URL
+  instance:
+    prefer-ip-address: true     # Use IP instead of hostname
+    instance-id: ${spring.application.name}:${server.port}  # Unique ID
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info  # Expose health and info endpoints
+  health:
+    probes:
+      enabled: true  # Enable readiness/liveness checks (optional
