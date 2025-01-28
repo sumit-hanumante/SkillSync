@@ -14,12 +14,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="api-gateway" target="17" />
-      <module name="eureka-server" target="17" />
-      <module name="job-matching-service" target="17" />
-      <module name="resume-analyzer" target="17" />
       <module name="SkillSync" target="1.5" />
-      <module name="user-service" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
