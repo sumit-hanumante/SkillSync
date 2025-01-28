@@ -1,6 +1,7 @@
 # IntelliJ IDEA
 *.iml
 .idea/
+.idea/libraries/
 
 # Compiled class file
 *.class

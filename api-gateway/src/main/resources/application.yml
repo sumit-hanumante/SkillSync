@@ -1,19 +1,40 @@
+server:
+  port: 8080  # Gateway port (clients will hit this)
+
 spring:
+  application:
+    name: api-gateway
   cloud:
     gateway:
       routes:
+        # Route for user-service
         - id: user-service
-          uri: lb://USER-SERVICE  # Match Eureka's uppercase service name
+          uri: lb://user-service  # "lb" = load balancing via Eureka
           predicates:
-            - Path=/api/users/**
-      loadbalancer:
-        health-check:
-          interval: 5s  # Speed up health checks
+            - Path=/api/users/**  # Forward /api/users/* to user-service
+          filters:
+            - StripPrefix=1  # Remove "/api/users" before forwarding
 
-server:
-  port: 8080
+        # Route for resume-analyzer
+        - id: resume-analyzer
+          uri: lb://resume-analyzer
+          predicates:
+            - Path=/api/resumes/**
+          filters:
+            - StripPrefix=1
 
+        # Route for job-matching-service
+        - id: job-matching-service
+          uri: lb://job-matching-service
+          predicates:
+            - Path=/api/jobs/**
+          filters:
+            - StripPrefix=1
+
+# Eureka Configuration
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true  # Enable health checks
