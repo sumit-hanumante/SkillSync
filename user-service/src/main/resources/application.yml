@@ -1,6 +1,18 @@
 spring:
   application:
     name: user-service  # Unique service name for Eureka
+  datasource:
+    url: jdbc:postgresql://postgres:5432/users
+    username: admin   # Add this
+    password: admin   # Add this
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true  # Enable retry for Eureka registration
 
 server:
   port: 8081  #%20Explicitly%20define%20the%20port
@@ -10,7 +22,7 @@ eureka:
     register-with-eureka: true  # Enable registration
     fetch-registry: true        # Fetch registry from Eureka
     service-url:
-      defaultZone: http://localhost:8761/eureka/  # Eureka server URL
+      defaultZone: http://eureka-server:8761/eureka/  # Eureka server URL
   instance:
     prefer-ip-address: true     # Use IP instead of hostname
     instance-id: ${spring.application.name}:${server.port}  # Unique ID
@@ -22,4 +34,6 @@ management:
         include: health,info  # Expose health and info endpoints
   health:
     probes:
-      enabled: true  # Enable readiness/liveness checks (optional
+      enabled: true  # Enable readiness/liveness checks (optional)
+jwt:
+  secret: NGE2ZjJjMDQtYjRkMi00NmYxLWE5MGUtYmMyZGU4MzFiYzM2
